@@ -10,9 +10,11 @@ import {
 } from "react-router-dom";
 import Layout from './components/layout/layout';
 import ViewRecipe from './views/Recipe';
+import FormUser from './components/form/users/form-user'
 
 
 const CustomRoute = ({ ...rest }) => {
+
     if (!isAuthenticated()) {
         return <Redirect to='/login' />
     }
@@ -25,6 +27,7 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" component={IndexSection} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={FormUser} />
             <CustomRoute path="/users" component={ViewUser} />
             <CustomRoute path="/recipes" component={ViewRecipe} />
             <Route exact path="*" component={() => (<h1>404 | Not Found</h1>)} />

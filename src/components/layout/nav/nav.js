@@ -25,7 +25,7 @@ const Nav = () => {
         if (Object.keys(usuario).length === 0) {
             return (
                 <>
-                    <button onClick={() => changePage('/users/create')} > Cadastre-se</button>
+                    <button onClick={() => changePage('/signup')} > Cadastre-se</button>
                     <button onClick={() => changePage('/login')} >Login</button>
                 </>
             )
