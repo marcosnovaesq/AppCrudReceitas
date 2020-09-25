@@ -1,0 +1,14 @@
+.divShow{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0px;
+}
+
+.divInfo{
+    border-radius: 5px;
+    border: thin solid #fc8c03;
+    padding: 50px;
+}
+

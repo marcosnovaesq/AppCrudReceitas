@@ -1,0 +1,82 @@
+/* MAIN ABOUT */
+
+main .about{
+    height: 300px;
+    width: 100%;
+    display: flex;
+    padding-top: 20px;
+  }
+  
+  main .about .textAbout{
+    width: 10px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    
+  }
+  
+  main .about .textAbout h2{
+    color: #fc8c03;
+    font-size: 50px;
+    font-weight: bolder;
+  }
+  
+  main .about .imgAbout{
+    width: 50%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  main .about .imgAbout img{
+    height: 300px;
+    width: 300px;
+    padding-right: 100px;
+  }
+
+
+  /* MAIN INFO*/
+
+main .info {
+    height: 250px;
+    width: 90%;
+    background-color: #fc8c03;
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  main .info .card{
+    width: 250px;
+    height: 200px;
+    margin: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  main .info .card .icon {
+    padding-top: 10%;
+    color: #fc8c03;
+    font-size: 40px;
+  }
+  
+  main .info .card .description{
+    padding-bottom: 10%;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #fc8c03;
+  }

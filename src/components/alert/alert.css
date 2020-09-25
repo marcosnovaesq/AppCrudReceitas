@@ -1,0 +1,33 @@
+.alert {
+    min-width: 80vw;
+    margin: 10px 35px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    text-align: center
+}
+
+.alert span {
+    flex: 1;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #d4edda;
+    border-color: #d6e9c6;
+}
+
+.alert-error {
+    color: #721D24;
+    background-color: #F8D7DA;
+    border-color: #F8D7DA;
+}
+
+.alert-info {
+    color: #fff;
+    background-color: #228AE6;
+    border-color: #228AE6;
+}
