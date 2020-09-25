@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { createUser, getUserById, updateUser } from '../../../service/user'
+import { processoLogin } from '../../../service/auth'
 import { useHistory, useParams } from 'react-router-dom'
+import UserContext from '../../../context/usercontext'
 import Alert from '../../alert/alert'
 import '../form.css'
 
 const FormUser = () => {
-
+    const { setUsuarioLogado } = useContext(UserContext)
     const [form, setForm] = useState({
         isAdmin: false,
         isActive: true
@@ -49,6 +51,10 @@ const FormUser = () => {
     const submitForm = async (event) => {
         try {
             event.preventDefault()
+            const formLogin = {
+                email: form.email,
+                senha: form.senha
+            }
             await methodSubmit(form)
             setForm({})
             setAlert({
@@ -56,10 +62,15 @@ const FormUser = () => {
                 mensagem: 'Formulario enviado com sucesso',
                 show: true
             })
-
-            setTimeout(() =>
-                history.push('/users')
-                , 3000)
+            window.scrollTo(0, 0)
+            setTimeout(async () => {
+                if (!isEdit) {
+                    const user = await processoLogin(formLogin)
+                    setUsuarioLogado(user)
+                }
+                history.push('/recipes')
+            }
+                , 1000)
         } catch (error) {
             if (error.response) {
                 setAlert({
@@ -77,8 +88,9 @@ const FormUser = () => {
                     mensagem: 'Aconteceu algo inesperado, tente novamente mais tarde'
                 })
             }
+            window.scrollTo(0, 0)
         }
-        window.scrollTo(0, 0)
+
     }
 
     return (

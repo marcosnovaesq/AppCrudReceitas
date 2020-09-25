@@ -1,11 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import Alert from '../../alert/alert'
-import { login } from '../../../service/auth'
-import { saveToken } from '../../../config/auth'
+import { processoLogin } from '../../../service/auth'
 import UserContext from '../../../context/usercontext'
 import '../form.css'
-import { clientHTTP } from '../../../config/config'
 const Login = () => {
     const [form, setForm] = useState({})
     const [alert, setAlert] = useState({})
@@ -27,9 +25,7 @@ const Login = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         try {
-            const { data: { token, user } } = await login(form)
-            clientHTTP.defaults.headers['x-auth-token'] = token;
-            saveToken(token)
+            const user = await processoLogin(form)
             setForm({})
             setAlert({
                 type: 'success',
@@ -37,6 +33,7 @@ const Login = () => {
                 show: true
             })
             window.scrollTo(0, 0)
+            console.log(user)
             setTimeout(() => {
                 history.push('/recipes')
                 setUsuarioLogado(user)
