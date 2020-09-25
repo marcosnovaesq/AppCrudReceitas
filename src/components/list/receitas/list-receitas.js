@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { listRecipe, deleteRecipe } from '../../../service/recipe';
 import Loading from '../../layout/loading/loading'
 import { mapeiaDificuldade, formataStringTamanho, conteudoVazio } from '../../../helpers/dataHelper'
 import { useHistory } from 'react-router-dom'
+import UserContext from '../../../context/usercontext'
 import '../list.css'
 const ListReceitas = () => {
 
     const [receitas, setReceitas] = useState([])
     const [loading, setLoading] = useState(false)
+    const { usuarioLogado } = useContext(UserContext)
     const history = useHistory()
 
 
@@ -27,6 +29,15 @@ const ListReceitas = () => {
 
     const mudaPage = () => {
         history.push('/recipes/create')
+    }
+
+
+    const geraBotoes = (receita) => {
+        if (receita.user === usuarioLogado.id) {
+            return (<> <span><button onClick={() => handleShow(receita)}>Exibir</button></span> |<span><button>Editar</button></span> |<span> <button onClick={() => handleDelete(receita)}>Excluir</button></span></>)
+        } else {
+            return (<span><button onClick={() => handleShow(receita)}>Exibir</button></span>)
+        }
     }
 
 
@@ -50,13 +61,13 @@ const ListReceitas = () => {
 
     const montarReceitas = () => {
         return receitas.map((receita, index) => (
-            <tr className="linhaTabela" onClick={() => handleShow(receita)} key={index}>
+            <tr className="linhaTabela" key={index}>
                 <td className="tdTabela" >{formataStringTamanho(receita.nome)}</td>
                 <td className="tdTabela" >{receita.tipo}</td>
                 <td className="tdTabela" >{receita.rendimento + " porções"}</td>
                 <td className="tdTabela" >{receita.tempo + " minutos"}</td>
                 <td className="tdTabela" >{mapeiaDificuldade[receita.dificuldade]}</td>
-                <td className="tdTabela" > <span><button>Editar</button></span> |<span> <button onClick={() => handleDelete(receita)}>Excluir</button></span></td>
+                <td className="tdTabela" > {geraBotoes(receita)}</td>
             </tr>
         ))
     }
