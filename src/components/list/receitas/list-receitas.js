@@ -33,7 +33,7 @@ const ListReceitas = () => {
 
 
     const geraBotoes = (receita) => {
-        if (receita.user === usuarioLogado.id) {
+        if (receita.user.user_id === usuarioLogado.id) {
             return (<> <span><button onClick={() => handleShow(receita)}>Exibir</button></span> |<span><button>Editar</button></span> |<span> <button onClick={() => handleDelete(receita)}>Excluir</button></span></>)
         } else {
             return (<span><button onClick={() => handleShow(receita)}>Exibir</button></span>)
@@ -63,6 +63,7 @@ const ListReceitas = () => {
         return receitas.map((receita, index) => (
             <tr className="linhaTabela" key={index}>
                 <td className="tdTabela" >{formataStringTamanho(receita.nome)}</td>
+                <td className="tdTabela" ><a className="linkProfile" href={`users/${receita.user.user_id}`}>{formataStringTamanho(receita.user.user_nome)}</a></td>
                 <td className="tdTabela" >{receita.tipo}</td>
                 <td className="tdTabela" >{receita.rendimento + " porções"}</td>
                 <td className="tdTabela" >{receita.tempo + " minutos"}</td>
@@ -80,6 +81,7 @@ const ListReceitas = () => {
                         <thead>
                             <tr>
                                 <th>nome</th>
+                                <th>autor(a)</th>
                                 <th>tipo</th>
                                 <th>rendimento</th>
                                 <th>tempo</th>

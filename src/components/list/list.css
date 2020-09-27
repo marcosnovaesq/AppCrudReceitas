@@ -55,6 +55,7 @@ main #table table th{padding: 10px;}
 .linhaTabela:hover {
     background-color: #fc8c03;
     cursor: pointer;
+
 }
 
 .tdTabela {
@@ -65,3 +66,13 @@ main #table table th{padding: 10px;}
     text-align: center;
     margin: 150px 0px;
 }    
+
+.linkProfile {
+    text-decoration: none;
+    color: #fc8c03;
+    font-weight: bold;
+}
+
+.tdTabela .linkProfile:hover {
+    color: white;
+}

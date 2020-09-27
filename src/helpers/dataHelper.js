@@ -28,9 +28,24 @@ const conteudoVazio = (entity) => {
     )
 }
 
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+const formataData = (data) => {
+    let dia = data.substring(0, 10).split('-').reverse().join('/')
+    let hora = data.substring(11, 16)
+    let resposta = dia + " às " + hora
+    return resposta
+}
+
+
 export {
     formataStringTamanho,
     mapeiaDificuldade,
     booleanToString,
-    conteudoVazio
+    conteudoVazio,
+    formataData,
+    capitalize
 }

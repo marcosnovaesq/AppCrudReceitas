@@ -63,7 +63,6 @@ const FormReceita = () => {
         body["ingredientes"] = listIngredientes
         body["passos"] = listPassos
         body["user"] = usuarioLogado.id
-
         return body
     }
 
@@ -80,7 +79,7 @@ const FormReceita = () => {
         e.preventDefault()
         try {
             const reqBody = montaBody()
-            await createRecipe(reqBody)
+            const recipe = await createRecipe(reqBody)
             zeraForm()
             setAlert({
                 type: 'success',
@@ -88,7 +87,7 @@ const FormReceita = () => {
                 show: true
             })
             setTimeout(() => {
-                history.push('/recipes')
+                history.push(`/recipes/${recipe._id}`)
             }, 3000)
         } catch (error) {
             if (error.response) {
