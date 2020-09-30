@@ -12,3 +12,16 @@
     padding: 50px;
 }
 
+.linkItem {
+    text-decoration: none;
+    color: #fc8c03;
+    font-weight: bold;
+}
+
+
+.liShow {
+    margin-left: 30px;
+}
+.listshow{
+    list-style-type: none;
+}

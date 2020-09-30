@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Ingredient from './ingredient'
 import Passo from './passo'
 import Alert from '../../alert/alert'
-import { createRecipe } from '../../../service/recipe'
+import { createRecipe, updateRecipe, getRecipeById } from '../../../service/recipe'
 import UserContext from '../../../context/usercontext'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import '../form.css'
 
 const FormReceita = () => {
@@ -12,6 +12,9 @@ const FormReceita = () => {
     const { usuarioLogado } = useContext(UserContext)
     const [listIngredientes, setListIngredientes] = useState([])
     const [listPassos, setListPassos] = useState([])
+    const { id } = useParams()
+    const [isEdit, setIsEdit] = useState(false)
+    const methodSubmit = isEdit ? updateRecipe : createRecipe
     const [alert, setAlert] = useState({})
     const [form, setForm] = useState({
         "tipo": "salgado",
@@ -110,6 +113,32 @@ const FormReceita = () => {
         window.scrollTo(0, 0)
 
     }
+
+    const setaEstados = (data) => {
+        const estado = {
+            nome: data.nome,
+            tipo: data.tipo,
+            rendimento: data.rendimento,
+            tempo: data.tempo,
+            dificuldade: data.dificuldade
+        }
+        setForm(estado)
+        setListIngredientes(data.ingredientes)
+        setListPassos(data.passos)
+    }
+
+    useEffect(() => {
+        const getShowRecipe = async (id) => {
+            const recipe = await getRecipeById(id)
+            setaEstados(recipe.data)
+        }
+
+        if (id) {
+            getShowRecipe(id)
+            setIsEdit(true)
+        }
+
+    }, [id])
 
     return (
         <div className="form">

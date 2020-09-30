@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Loading from '../../layout/loading/loading'
 import './showrecipe.css'
 import '../show.css'
@@ -12,6 +12,7 @@ const ShowRecipe = () => {
     const [recipe, setRecipe] = useState({})
     const [loading, setLoading] = useState(true)
     const { usuarioLogado } = useContext(UserContext)
+    const history = useHistory()
     const { id } = useParams()
 
 
@@ -20,13 +21,17 @@ const ShowRecipe = () => {
             setLoading(true)
             const recipe = await getRecipeById(id)
             setRecipe(recipe.data)
-            console.log(recipe.data)
             setLoading(false)
         } catch (error) {
             console.log(error.message)
             setRecipe({})
             setLoading(false)
         }
+    }
+
+    const handleEdit = (receita) => {
+        history.push(`/recipes/edit/${receita._id}`)
+
     }
 
     const montaExibicaoReceita = () => {
@@ -36,7 +41,7 @@ const ShowRecipe = () => {
                     <div className="divShow">
                         <div className="divInfo">
                             <p><b>Nome:</b> {capitalize(recipe.nome)}</p>
-                            <p><b>Criado por:</b> <a className="linkProfile" href={`users/${recipe.user.user_id}`}>{capitalize(recipe.user.user_nome)}</a></p>
+                            <p><b>Criado por:</b> <a className="linkItem" href={`users/${recipe.user.user_id}`}>{capitalize(recipe.user.user_nome)}</a></p>
                             <p> <b>Data de criação:</b> {formataData(recipe.createdAt)}</p>
                             <p><b>Dificuldade:</b> {mapeiaDificuldade[recipe.dificuldade]}</p>
                             <p><b>Tempo estimado:</b> {recipe.tempo + " minutos"}</p>
@@ -56,7 +61,7 @@ const ShowRecipe = () => {
                             </ol>
                             {usuarioLogado.id === recipe.user.user_id ?
                                 <div className="buttonShow">
-                                    <button>Editar Receita</button>
+                                    <button onClick={() => handleEdit(recipe)}>Editar Receita</button>
                                     <button>Deletar Receita</button>
                                 </div> : ""}
                         </div>

@@ -34,7 +34,10 @@ const ListReceitas = () => {
 
     const geraBotoes = (receita) => {
         if (receita.user.user_id === usuarioLogado.id) {
-            return (<> <span><button onClick={() => handleShow(receita)}>Exibir</button></span> |<span><button>Editar</button></span> |<span> <button onClick={() => handleDelete(receita)}>Excluir</button></span></>)
+            return (<>
+                <span><button onClick={() => handleShow(receita)}>Exibir</button></span> |
+                <span><button onClick={() => handleEdit(receita)}>Editar</button></span> |
+                <span> <button onClick={() => handleDelete(receita)}>Excluir</button></span></>)
         } else {
             return (<span><button onClick={() => handleShow(receita)}>Exibir</button></span>)
         }
@@ -56,6 +59,10 @@ const ListReceitas = () => {
 
     const handleShow = (receita) => {
         history.push(`/recipes/${receita._id}`)
+    }
+
+    const handleEdit = (receita) => {
+        history.push(`/recipes/edit/${receita._id}`)
 
     }
 
