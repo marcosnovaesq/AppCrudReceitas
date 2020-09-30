@@ -9,7 +9,7 @@ const ViewUser = (props) => {
 
     const rotaASerExibida = () => {
         if (props.location.pathname === '/users') {
-            return <Route exact match path={props.match.path} component={ListUser} />
+            return <Route match path={props.match.path} component={ListUser} />
         }
         else if (props.location.pathname === '/users/create') {
             return <Route exact path={props.match.path + "/create"} component={FormUser} />

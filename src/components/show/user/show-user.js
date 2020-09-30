@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory, Link } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { getUserById } from '../../../service/user'
 import { listRecipesByUser } from '../../../service/recipe'
-import Loading from '../../layout/loading/loading'
 import './showuser.css'
 import '../show.css'
 import { capitalize } from '../../../helpers/dataHelper'
-const ShowUser = (props) => {
+import Loading from '../../layout/loading/loading'
+const ShowUser = () => {
 
     const [user, setUser] = useState({})
     const history = useHistory()
     const [userRecipes, setUserRecipes] = useState([])
     const [loading, setLoading] = useState(true)
     const { id } = useParams()
-    console.log(props)
 
     const getShowUser = async (id) => {
         try {
@@ -22,9 +21,11 @@ const ShowUser = (props) => {
                 delete user.data.senha
             }
             setUser(user.data)
+            setLoading(false)
         } catch (error) {
             console.log(error.message)
             setUser({})
+            setLoading(false)
         }
     }
 
@@ -38,9 +39,9 @@ const ShowUser = (props) => {
         }
     }
 
-
-
-
+    const changePage = (id) => {
+        history.push(`/recipes/${id}`)
+    }
 
 
     const montaExibicaoUsuario = () => {
@@ -56,9 +57,9 @@ const ShowUser = (props) => {
                             <ul className="listshow">
                                 {userRecipes.map((value, index) => {
                                     return <li className="liShow" key={index}>
-                                        <Link className="linkItem btnItem" to={{ pathname: `recipes/${value._id}` }} >
+                                        <button className="linkItem btnItem" onClick={() => changePage(value._id)}>
                                             {value.nome}
-                                        </Link>
+                                        </button>
                                     </li>
                                 })}
                             </ul>
@@ -81,7 +82,6 @@ const ShowUser = (props) => {
                 console.log(error.message)
                 setLoading(false)
             }
-
         }
         montaInfosUsuario(id)
         return () => { }
@@ -90,6 +90,8 @@ const ShowUser = (props) => {
     return (
         <>
             {loading ? <Loading /> : montaExibicaoUsuario()}
+
+            {/* <Loading /> */}
         </>
     )
 }

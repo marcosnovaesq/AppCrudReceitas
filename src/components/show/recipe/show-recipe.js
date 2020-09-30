@@ -41,7 +41,7 @@ const ShowRecipe = () => {
                     <div className="divShow">
                         <div className="divInfo">
                             <p><b>Nome:</b> {capitalize(recipe.nome)}</p>
-                            <p><b>Criado por:</b> <a className="linkItem" href={`users/${recipe.user.user_id}`}>{capitalize(recipe.user.user_nome)}</a></p>
+                            <p><b>Criado por:</b> <a className="linkItem" href={`/users/${recipe.user.user_id}`}>{capitalize(recipe.user.user_nome)}</a></p>
                             <p> <b>Data de criação:</b> {formataData(recipe.createdAt)}</p>
                             <p><b>Dificuldade:</b> {mapeiaDificuldade[recipe.dificuldade]}</p>
                             <p><b>Tempo estimado:</b> {recipe.tempo + " minutos"}</p>

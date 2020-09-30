@@ -49,10 +49,9 @@ const ViewRecipe = (props) => {
             else {
                 return <Redirect to="/recipes" />
             }
-
         }
         else {
-            return <Route match path={props.match.path + "/:id"} component={ShowRecipe} />
+            return <Route exact path={props.match.path + "/:id"} component={ShowRecipe} />
         }
     }
 
