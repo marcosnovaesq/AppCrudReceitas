@@ -1,3 +1,9 @@
+Bem vindo ao projeto, a parte de react, tem um repositorio para a API em node, e o bd em MongoDb
+se quiser testar o projeto sem baixar o codigo, va para https://receitas-bootcamp.vercel.app/
+Fique livre para relatar qualquer bug em um comentario!
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
